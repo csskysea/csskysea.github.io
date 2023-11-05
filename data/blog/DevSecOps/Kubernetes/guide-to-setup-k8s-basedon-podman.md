@@ -1,9 +1,9 @@
 ---
-title: How to setup minikube based on podman
+title: How to setup minikube based on podman on macos.
 date: '2023-11-05'
 tags: ['devops','kubernetes']
 draft: false
-summary: 'Introduce how to deploy minikube environment using podman driver.'
+summary: 'Introduce how to deploy minikube environment using podman driver on macos.'
 ---
 
 ## Background
@@ -40,6 +40,12 @@ podman-machine-default*  qemu        3 hours ago  Currently running  2          
 minikube start --driver=podman --container-runtime=containerd
 ```
 here, use `podman` driver to replace `docker`, choose `containerd` as container runtime interface for podman rootless(means run podman process with non priviledge, podman wins docker which runs in daemon and need root priviledge to run.)
+
+4. use common `kubectl` command to verify if minikube cluster is ready.
+
+```shell
+kubectl get nodes
+```
 
 ## Some notes
 - for download some base image smoothly(access k8s official image registry or google image registry), you'd better use vpn to access them. of course you can specify `cn` registry mirror as minikube start option, but may encounter some unexpected errors.
