@@ -1,6 +1,6 @@
 ---
 title: How to setup k8s with kind.
-date: '2023-11-05'
+date: '2024-01-05'
 tags: ['devops','kubernetes']
 draft: false
 summary: 'Introduce how to deploy minikube environment using podman driver on macos.'
@@ -68,3 +68,15 @@ networking:
   # the default CNI will not be installed
   disableDefaultCNI: true
 ```
+
+### 利用`kind`创建 k8s 集群
+
+```shell
+kind create cluster --config xxx.yaml -n <cluster-name>
+```
+
+### 安装 `flannel` cni 插件
+
+因为上面配置的`kind` 配置文件没有使用默认的自带cni,所以我们需要为集群单独安装cni 插件，这里选用`flannel`。
+具体安装细节请参考  https://routemyip.com/posts/k8s/setup/flannel/ 
+
