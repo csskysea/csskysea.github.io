@@ -1,10 +1,11 @@
 ---
 title: How to setup k8s with kind.
-date: '2024-01-05'
-tags: ['devops','kubernetes']
+date: '2024-03-28'
+tags: ['devops','kubernetes','flannel','calico']
 draft: false
-summary: 'Introduce how to deploy minikube environment using podman driver on macos.'
+summary: '使用kind 部署本地测试k8s集群'
 ---
+# 使用kind 部署本地测试k8s集群
 
 ## What's kind?
 
@@ -75,8 +76,32 @@ networking:
 kind create cluster --config xxx.yaml -n <cluster-name>
 ```
 
+## 网络
+
+为了打通集群内部不同节点上的pod通信，需要安装cni 网络插件，比较流行的有 `fannel` 和 `calico`, 其中 `calico`除了支持流量转发之外还支持网络策略。也有将 `fannel` 和 `calico` 结合起来使用的情况，就是将 前者用在流量转发，后者用在网络策略。
+
 ### 安装 `flannel` cni 插件
 
 因为上面配置的`kind` 配置文件没有使用默认的自带cni,所以我们需要为集群单独安装cni 插件，这里选用`flannel`。
 具体安装细节请参考  https://routemyip.com/posts/k8s/setup/flannel/ 
 
+### 安装 `calico` cni 插件
+
+比较便捷的方法是安装 `calico` operator
+
+1. install the Calico operator.
+
+```shell
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/tigera-operator.yaml
+```
+2. install custom resource definitions.
+
+在这里可以修改pod 的网段，注意不要与节点网段重合。
+```shell
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/custom-resources.yaml
+```
+
+
+## Reference
+
+  <https://docs.tigera.io/calico/latest/getting-started/kubernetes/kind> "安装calico插件"
