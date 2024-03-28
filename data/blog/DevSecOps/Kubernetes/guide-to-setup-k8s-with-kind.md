@@ -104,4 +104,4 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2
 
 ## Reference
 
-  <https://docs.tigera.io/calico/latest/getting-started/kubernetes/kind> "安装calico插件"
+  [如何安装calico插件](https://docs.tigera.io/calico/latest/getting-started/kubernetes/kind)
