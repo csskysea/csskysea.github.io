@@ -76,6 +76,16 @@ networking:
 kind create cluster --config xxx.yaml -n <cluster-name>
 ```
 
+### 设置 `kubectl` 命令行参数自动提示功能
+
+```shell
+#!/bin/env bash
+
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+source ~/.bashrc
+
+```
+
 ## 网络
 
 为了打通集群内部不同节点上的pod通信，需要安装cni 网络插件，比较流行的有 `fannel` 和 `calico`, 其中 `calico`除了支持流量转发之外还支持网络策略。也有将 `fannel` 和 `calico` 结合起来使用的情况，就是将 前者用在流量转发，后者用在网络策略。

@@ -1,5 +1,5 @@
 ---
-name: Tails Azimuth
+name: CHEN Shi
 avatar: /static/images/avatar.png
 occupation: devops engineer
 company: wiredcraft
